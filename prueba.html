@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+
+        #strength-bar,
+        #strength-bar2 {
+            height: 5px;
+            margin-bottom: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #fill-progress,
+        #fill-progress2 {
+            height: 100%;
+            width: 0;
+            background-color: #F56C2D;
+            /* Rojo */
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+
+    <script>
+        function checkPasswordStrength() {
+            var password = document.getElementById('password').value;
+            var strengthBar = document.getElementById('strength-bar');
+            var fillProgress = document.getElementById('fill-progress');
+            var strengthMessage = document.getElementById('strength-message');
+            var strength = 0;
+
+            // Requisitos
+            var hasUpperCase = /[A-Z]/.test(password);
+            var hasLowerCase = /[a-z]/.test(password);
+            var hasDigit = /\d/.test(password);
+            var hasSpecialChar = /[!@#$%^&*(),.?":{}|<>\/]/.test(password);
+            var hasMinLength = password.length >= 6;
+
+            // Mostrar u ocultar barra y mensaje según la longitud de la contraseña
+            if (password.length > 0) {
+                strengthBar.style.display = 'block';
+                strengthMessage.classList.remove('hidden');
+            } else {
+                strengthBar.style.display = 'none';
+                strengthMessage.classList.add('hidden');
+            }
+
+            // Actualizar color y ancho de la barra según los requisitos cumplidos
+            var fillWidth = 0;
+            var barColor = '#F56C2D'; // Rojo
+
+            if (hasMinLength) {
+                strength++;
+                document.getElementById('char-length').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('char-length').className = 'red';
+            }
+
+            if (hasUpperCase) {
+                strength++;
+                document.getElementById('upper-case').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('upper-case').className = 'red';
+            }
+
+            if (hasLowerCase) {
+                strength++;
+                document.getElementById('lower-case').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('lower-case').className = 'red';
+            }
+
+            if (hasSpecialChar) {
+                strength++;
+                document.getElementById('special-char').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('special-char').className = 'red';
+            }
+
+            if (hasDigit) {
+                strength++;
+                document.getElementById('numeral').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('numeral').className = 'red';
+            }
+
+            // Actualizar color y ancho de la barra según los requisitos cumplidos
+            fillProgress.style.width = fillWidth + '%';
+
+            if (strength >= 3) {
+                barColor = '#FED766'; // Amarillo
+            }
+
+            if (strength === 5) {
+                barColor = '#39E29D'; // Verde
+            }
+
+            fillProgress.style.backgroundColor = barColor;
+        }
+
+        function checkPasswordStrength2() {
+            var password = document.getElementById('password2').value;
+            var strengthBar = document.getElementById('strength-bar2');
+            var fillProgress = document.getElementById('fill-progress2');
+            var strengthMessage = document.getElementById('strength-message2');
+            var strength = 0;
+
+            // Requisitos
+            var hasUpperCase = /[A-Z]/.test(password);
+            var hasLowerCase = /[a-z]/.test(password);
+            var hasDigit = /\d/.test(password);
+            var hasSpecialChar = /[!@#$%^&*(),.?":{}|<>\/]/.test(password);
+            var hasMinLength = password.length >= 6;
+
+            // Mostrar u ocultar barra y mensaje según la longitud de la contraseña
+            if (password.length > 0) {
+                strengthBar.style.display = 'block';
+                strengthMessage.classList.remove('hidden');
+            } else {
+                strengthBar.style.display = 'none';
+                strengthMessage.classList.add('hidden');
+            }
+
+            // Actualizar color y ancho de la barra según los requisitos cumplidos
+            var fillWidth = 0;
+            var barColor = '#F56C2D'; // Rojo
+
+            if (hasMinLength) {
+                strength++;
+                document.getElementById('char-length2').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('char-length2').className = 'red';
+            }
+
+            if (hasUpperCase) {
+                strength++;
+                document.getElementById('upper-case2').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('upper-case2').className = 'red';
+            }
+
+            if (hasLowerCase) {
+                strength++;
+                document.getElementById('lower-case2').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('lower-case2').className = 'red';
+            }
+
+            if (hasSpecialChar) {
+                strength++;
+                document.getElementById('special-char2').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('special-char2').className = 'red';
+            }
+
+            if (hasDigit) {
+                strength++;
+                document.getElementById('numeral2').className = 'green';
+                fillWidth += 20;
+            } else {
+                document.getElementById('numeral2').className = 'red';
+            }
+
+            // Actualizar color y ancho de la barra según los requisitos cumplidos
+            fillProgress.style.width = fillWidth + '%';
+
+            if (strength >= 3) {
+                barColor = '#FED766'; // Amarillo
+            }
+
+            if (strength === 5) {
+                barColor = '#39E29D'; // Verde
+            }
+
+            fillProgress.style.backgroundColor = barColor;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Verificador de fortaleza de contraseña</h1>
+
+    <h3>Contraseña 1</h3>
+    <input type="password" id="password" onkeyup="checkPasswordStrength()" placeholder="Ingresa tu contraseña">
+    <div id="strength-bar" style="display: none;">
+        <div id="fill-progress"></div>
+    </div>
+    <div id="strength-message" class="hidden">
+        At least <span id="char-length" class="red">6 characters</span> long with
+        <span id="upper-case" class="red">one uppercase letter</span>,
+        <span id="lower-case" class="red">one lowercase letter</span>,
+        <span id="special-char" class="red">one special character</span>,
+        and <span id="numeral" class="red">numeral</span>.
+    </div>
+
+
+    <h3>Contraseña 2</h3>
+    <input type="password" id="password2" onkeyup="checkPasswordStrength2()" placeholder="Ingresa tu contraseña">
+
+    <div id="strength-bar2" style="display: none;">
+        <div id="fill-progress2"></div>
+    </div>
+    <div id="strength-message2" class="hidden">
+        At least <span id="char-length2" class="red">6 characters</span> long with
+        <span id="upper-case2" class="red">one uppercase letter</span>,
+        <span id="lower-case2" class="red">one lowercase letter</span>,
+        <span id="special-char2" class="red">one special character</span>,
+        and <span id="numeral2" class="red">numeral</span>.
+    </div>
+
+    <grammarly-editor-plugin>
+        <textarea></textarea>
+    </grammarly-editor-plugin>
+
+</body>
+
+</html>
